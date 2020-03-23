@@ -1,0 +1,208 @@
+---
+title: "Computer Lab 1"
+author: "Rachel Wright"
+date: "1/30/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The commands we'll use today are part of the `tidyverse` package. This package should already be installed on the classroom computers.
+
+If you try to run this code on your own computer, install tidyverse using the following command. Remove the "#" to make the code executable.
+
+```{r install tidyverse}
+#install.packages("tidyverse")
+```
+
+Load the `tidyverse` package. You only have to INSTALL a package once per computer, but you have to load it every time you want to use it.
+
+```{r load tidyverse}
+library(tidyverse)
+```
+
+# PART 1: INTRODUCTION TO R
+
+You can use R like a calculator.
+
+```{r calculator}
+1+2
+```
+
+Use the next "chunk" to perform your own simple mathematical operations in R.
+
+```{r student calculator}
+# Do some math here
+
+
+```
+
+You can save the results to a "variable" (a named object that stores data for you).
+
+```{r creating variables}
+mySum <- 1+2 
+mySum
+```
+
+Use the next couple of lines to save the output of a mathematical operation to a variable of your choice. (Hint: your variable name shouldn't contain spaces or special characters. "_" and "." are OK and are often used in place of a space.)
+
+```{r student variable creation}
+# Create a variable and do some math here
+
+
+```
+
+You can manipulate variables
+
+```{r manipulate variables}
+mySum*2
+```
+
+You can use "functions" embedded in the program to perform tasks.
+
+```{r use function}
+mySum <- sum(1,3)
+mySum # note that I just over-wrote the old value of "mySum" by naming it the same name! 
+# Be careful!!
+```
+
+
+You an create "vectors" of values.
+
+```{r create vector}
+myNumbers <- c(1,2,5)
+```
+
+And you can perform the same operations to vectors that you did to single values.
+
+```{r use function on vector}
+myNumbers*3
+sum(myNumbers)
+```
+
+It's important to know what "type" of data you are working with in R. We already saw a VECTOR.
+
+```{r vector data type}
+myVector <- c(1:10)
+myVector
+```
+
+You can also have a DATA FRAME.
+
+```{r data frame data type}
+myDataFrame <- data.frame("Category_Number" = c(1:4), 
+                          "Category_Color" = c("red", "green", "yellow", "pink"))
+myDataFrame
+```
+
+Notice that the data frame can contain different types of data.
+
+"Category Number" contains integers (whole numbers).
+
+"Category Color" contains factors (non-numeric values).
+
+```{r stratify data frame}
+str(myDataFrame)
+sum(myDataFrame$Category_Number)
+sum(myDataFrame$Category_Color)
+```
+
+On the other hand, a MATRIX has the same type of data in every cell.
+
+```{r matrix}
+myMatrix <- matrix(1:24, ncol=3)
+myMatrix
+```
+
+# PART 2A: HISTOGRAM OF PHENOTYPIC VALUES AT A DIALLELIC LOCUS
+This is a big jump in R skill... I know! Don't worry if it doesn't make sense right now.
+
+Set the genotypes at a single diallelic locus.
+
+For our purposes, this genotype is also the "phenotypic value".
+
+```{r create genotypes for one locus}
+genotypes <- data.frame("genotype" = c(0, 1, 1, 2)) 
+# I had to make `genotypes` a data frame with only one column of data.
+# This is for annoying reasons you don't need to worry about :)
+genotypes
+```
+
+Plot the histogram for a single locus.
+
+```{r plot values for single locus}
+ggplot(genotypes, aes(x = genotype)) + 
+  geom_histogram(aes(y = stat(count/sum(count)))) + 
+  labs(title = "Phenotypic Values for a Single Diallelic Locus", 
+       y = "Proportion", x = "Phenotypic Value") +
+  theme_bw()
+```
+
+# PART 2B: HISTOGRAM OF PHENOTYPIC VALUES AT MULTIPLE DIALLELIC LOCI
+
+Set the genotypes at a single diallelic locus.
+
+For our purposes, this genotype is also the "phenotypic value."
+
+```{r create genotypes for each locus}
+genotypes <- c(0,1,1,2)
+```
+
+Set the possible genotypes for each locus.
+
+Add as many loci as you want!
+
+```{r assign genotypes to each locus}
+locus_1 <- genotypes
+locus_2 <- c(0,10,10,10)
+locus_3 <- genotypes
+locus_4 <- genotypes
+locus_5 <- genotypes
+locus_6 <- genotypes
+locus_7 <- genotypes
+```
+
+Determine the number of possible combinations for every locus.
+
+Don't forget to add your loci here!
+
+```{r determine all combinations of genotypes}
+all_combinations <- expand_grid(locus_1,locus_2,locus_3)
+all_combinations
+```
+
+Make a histogram of phenotypic values.
+
+```{r make a histogram}
+all_combinations%>% mutate(phenotypic_value = rowSums(.)) %>% 
+  ggplot(aes(x = phenotypic_value)) + 
+  geom_histogram(aes(y = stat(count/sum(count)))) + 
+  labs(title = "Phenotypic Values for Multiple Diallelic Loci", 
+       y = "Proportion", x = "Phenotypic Value") +
+  theme_bw()
+```
+
+
+Calculate the mean and standard deviation.
+
+```{r calculate summary stats}
+summary_stats <- all_combinations %>% mutate(phenotypic_value = rowSums(.)) %>% 
+  summarize(mean = mean(phenotypic_value), sd = sd(phenotypic_value))
+```
+
+Plot a normal distribution.
+
+```{r plot normal distribution}
+all_combinations %>% mutate(phenotypic_value = rowSums(.)) %>% 
+  ggplot(aes(x = phenotypic_value)) + 
+  geom_histogram(aes(y = stat(count/sum(count)))) + 
+  labs(title = "Phenotypic Values for Multiple Diallelic Loci", 
+       y = "Proportion", x = "Phenotypic Value") +
+  theme_bw() +
+  stat_function(
+    fun = dnorm, args = list(mean = summary_stats$mean, sd = summary_stats$sd),
+    col = 'red')
+```
+

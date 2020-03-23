@@ -1,0 +1,55 @@
+colony	growthRate	collectionSite	pH
+Montipora1	3.463203463	Haleiwa	Hi
+Montipora1	0.266922913	Haleiwa	Hi
+Montipora1	2.119542179	Haleiwa	Hi
+Montipora1	0.476190476	Haleiwa	Low
+Montipora1	1.29477773	Haleiwa	Low
+Montipora1	2.172732211	Haleiwa	Low
+Montipora2	7.253797576	Haleiwa	Hi
+Montipora2	2.56016385	Haleiwa	Hi
+Montipora2	2.822778596	Haleiwa	Hi
+Montipora2	2.431254192	Haleiwa	Low
+Montipora2	2.941176471	Haleiwa	Low
+Montipora2	3.19284802	Haleiwa	Low
+Montipora3	2.314270024	SChannel	Hi
+Montipora3	3.439153439	SChannel	Hi
+Montipora3	1.69482259	SChannel	Hi
+Montipora3	3.010399562	SChannel	Low
+Montipora3	3.505696757	SChannel	Low
+Montipora3	1.312032106	SChannel	Low
+Montipora4	10.79216733	SChannel	Hi
+Montipora4	7.497116494	SChannel	Hi
+Montipora4	11.69832095	SChannel	Hi
+Montipora4	4.423113119	SChannel	Low
+Montipora4	5.376344086	SChannel	Low
+Montipora4	5.06130596	SChannel	Low
+Montipora5	4.437617341	SChannel	Hi
+Montipora5	8.072174739	SChannel	Hi
+Montipora5	1.94235589	SChannel	Hi
+Montipora5	5.046197584	SChannel	Low
+Montipora5	1.202034212	SChannel	Low
+Montipora5	3.077816492	SChannel	Low
+Montipora6	2.990568208	SChannel	Hi
+Montipora6	2.34082397	SChannel	Hi
+Montipora6	1.705029838	SChannel	Hi
+Montipora6	3.829950211	SChannel	Low
+Montipora6	2.429543246	SChannel	Low
+Montipora6	NA	SChannel	Low
+Montipora7	8.564139942	SChannel	Hi
+Montipora7	5.821399464	SChannel	Hi
+Montipora7	3.240349394	SChannel	Hi
+Montipora7	4.275653924	SChannel	Low
+Montipora7	4.66853408	SChannel	Low
+Montipora7	3.401360544	SChannel	Low
+Montipora8	3.80952381	SChannel	Hi
+Montipora8	7.966857871	SChannel	Hi
+Montipora8	8.904374758	SChannel	Hi
+Montipora8	6.609332696	SChannel	Low
+Montipora8	3.85299348	SChannel	Low
+Montipora8	2.745806063	SChannel	Low
+			
+			
+			
+			
+			
+			
